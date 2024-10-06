@@ -45,5 +45,5 @@
 
 2. Run the training script:
     ```bash
-    streamlit run train_script.py
+    python train_script.py
     ```
