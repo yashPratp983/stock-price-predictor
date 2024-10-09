@@ -20,23 +20,13 @@ class Training:
     def build_model(self, input_shape):
         # Build LSTM model architecture
         model = Sequential([
-        Bidirectional(LSTM(128, return_sequences=True, kernel_regularizer=l2(1e-6)), input_shape=input_shape),
-        BatchNormalization(),
-        Dropout(0.3),
-        
-        Bidirectional(LSTM(64, return_sequences=True, kernel_regularizer=l2(1e-6))),
-        BatchNormalization(),
-        Dropout(0.3),
-        
-        Bidirectional(LSTM(32, return_sequences=False, kernel_regularizer=l2(1e-6))),
-        BatchNormalization(),
-        Dropout(0.3),
-        
-        Dense(32, activation='relu', kernel_regularizer=l2(1e-6)),
-        BatchNormalization(),
-        Dropout(0.3),
-        
-        Dense(5)
+        LSTM(100, return_sequences=True, input_shape=input_shape),
+        Dropout(0.2),
+        LSTM(100, return_sequences=False),
+        Dropout(0.2),
+        Dense(50, activation='relu'),
+        Dropout(0.2),
+        Dense(5, activation='linear')
     ])
         model.compile(optimizer=Adam(learning_rate=0.001), loss='mse')
         return model
